@@ -1,4 +1,4 @@
-CFLAGS += -std=c99
+CFLAGS += -std=c99 -DCENTOS6
 
 PROGRAM = spectre.out
 SOURCE  = spectre.c

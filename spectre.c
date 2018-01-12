@@ -21,6 +21,22 @@
 #include <x86intrin.h> /* for rdtsc, rdtscp, clflush */
 #endif
 
+#ifdef CENTOS6
+static unsigned long long __rdtscp(uint32_t *junk)
+{
+    unsigned long long tsc;
+    __asm__ __volatile__(
+        "rdtscp;"
+        "shl $32, %%rdx;"
+        "or %%rdx, %%rax"
+        : "=a"(tsc)
+        :
+        : "%rcx", "%rdx");
+
+    return tsc;
+}
+#endif
+
 /********************************************************************
 Victim code.
 ********************************************************************/
